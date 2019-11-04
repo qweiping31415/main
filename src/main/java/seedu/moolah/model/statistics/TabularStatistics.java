@@ -61,13 +61,12 @@ public class TabularStatistics extends Statistics {
     /**
      * Compares the difference in basic statistics across 2 time periods
      *
-     * @param expenses List of expenses
      * @param validCategories List of allowed categories in MooLah
      * @param firstStartDate The starting date meant for the first period to be compared
      * @param secondStartDate The starting date meant for the second period to be compared
      * @param primaryBudget The primary budget whose statistics is taken
      */
-    public static TabularStatistics run(ObservableList<Expense> expenses, List<Category> validCategories,
+    public static TabularStatistics run(List<Category> validCategories,
                                         Timestamp firstStartDate, Timestamp secondStartDate, Budget primaryBudget) {
         requireNonNull(firstStartDate);
         requireNonNull(secondStartDate);
@@ -78,7 +77,7 @@ public class TabularStatistics extends Statistics {
         Timestamp firstEndDate = new Timestamp(firstStartDate.getFullTimestamp().plus(period)).minusDays(1);
         Timestamp secondEndDate = new Timestamp(secondStartDate.getFullTimestamp().plus(period)).minusDays(1);
 
-        TabularStatistics statistics = new TabularStatistics(expenses, validCategories,
+        TabularStatistics statistics = new TabularStatistics(primaryBudget.getExpenses(), validCategories,
                 firstStartDate, firstEndDate,
                 secondStartDate, secondEndDate);
         statistics.generateTableData();

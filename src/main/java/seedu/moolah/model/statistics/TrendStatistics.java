@@ -63,7 +63,7 @@ public class TrendStatistics extends Statistics {
      * @param endDate The end date of the tracking period
      * @param primaryBudget The primary budget whose statistics is taken
      */
-    public static TrendStatistics run(ObservableList<Expense> expenses, List<Category> validCategories,
+    public static TrendStatistics run(List<Category> validCategories,
                                       Timestamp startDate, Timestamp endDate,
                                       Budget primaryBudget, boolean isBudgetMode) {
 
@@ -87,7 +87,7 @@ public class TrendStatistics extends Statistics {
                     StatsTrendCommand.HALF_OF_PERIOD_NUMBER);
         }
 
-        TrendStatistics statistics = TrendStatistics.verify(expenses, validCategories,
+        TrendStatistics statistics = TrendStatistics.verify(primaryBudget.getExpenses(), validCategories,
                 startDate, endDate, primaryBudget, isBudgetMode);
 
         statistics.generateTrendLine();

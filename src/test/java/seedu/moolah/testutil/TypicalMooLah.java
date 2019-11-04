@@ -53,6 +53,44 @@ public class TypicalMooLah {
             .withIsPrimary(false)
             .build();
 
+
+    public static final Budget DAY_BUDGET = new BudgetBuilder()
+            .withDescription("Day budget")
+            .withAmount("100")
+            .withStartDate("05-09-2019 evening")
+            .withPeriod("day")
+            .withEndDate("05-09-2019 noon")
+            .withIsPrimary(true)
+            .build();
+
+    public static final Budget WEEK_BUDGET = new BudgetBuilder()
+            .withDescription("Week Budget")
+            .withAmount("200")
+            .withStartDate("05-09-2019 noon")
+            .withPeriod("week")
+            .withEndDate("11-09-2019 evening")
+            .withIsPrimary(false)
+            .build();
+
+    public static final Budget MONTH_BUDGET = new BudgetBuilder()
+            .withDescription("Month Budget")
+            .withAmount("300")
+            .withStartDate("05-09-2019 noon")
+            .withPeriod("month")
+            .withEndDate("04-10-2019 evening")
+            .withIsPrimary(false)
+            .build();
+
+    public static final Budget YEAR_BUDGET = new BudgetBuilder()
+            .withDescription("Year Budget")
+            .withAmount("400")
+            .withStartDate("05-09-2019 noon")
+            .withPeriod("year")
+            .withEndDate("04-09-2020 evening")
+            .withIsPrimary(false)
+            .build();
+
+
     public static final Expense ANNIVERSARY = new ExpenseBuilder()
             .withDescription("Alices Birthday")
             .withPrice("20")
@@ -229,4 +267,7 @@ public class TypicalMooLah {
         return new ArrayList<>(Arrays.asList(
                 SCHOOL, OUTSIDE_SCHOOL));
     }
+
+
+
 }

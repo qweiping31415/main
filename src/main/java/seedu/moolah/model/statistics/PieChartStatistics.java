@@ -59,13 +59,12 @@ public class PieChartStatistics extends Statistics {
 
     /**
      * Creates a PieChartStatistics object with all the required information filled in its attributes
-     * @param expenses List of expenses
      * @param validCategories List of allowed categories in MooLah
      * @param startDate The start date of the tracking period
      * @param endDate The end date of the tracking period
      * @param primaryBudget The primary budget whose statistics is taken
      */
-    public static PieChartStatistics run(ObservableList<Expense> expenses, List<Category>
+    public static PieChartStatistics run(List<Category>
             validCategories, Timestamp startDate, Timestamp endDate, Budget primaryBudget) {
 
         requireNonNull(primaryBudget);
@@ -85,7 +84,7 @@ public class PieChartStatistics extends Statistics {
         }
 
 
-        PieChartStatistics statistics = PieChartStatistics.verify(expenses, validCategories, startDate, endDate);
+        PieChartStatistics statistics = PieChartStatistics.verify(primaryBudget.getExpenses(), validCategories, startDate, endDate);
         statistics.generatePieChartData();
         return statistics;
     }

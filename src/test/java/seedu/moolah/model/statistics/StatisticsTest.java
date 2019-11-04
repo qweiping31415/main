@@ -23,8 +23,8 @@ class StatisticsTest {
 
 
     public static final Expense VALID_EXPENSE = new ExpenseBuilder().build();
-//    public static final ObservableList<Expense> VALID_EXPENSE_LIST =
-//            ObservableList<Expense>.observableList(List.of(VALID_EXPENSE));
+    public static final ObservableList<Expense> VALID_EXPENSE_LIST =
+            FXCollections.observableList(List.of(VALID_EXPENSE));
 
 //    public static final String EMPTY_STRING_COMMAND_WORD = "";
 //    public static final String WHITE_SPACE_COMMAND_WORD = " ";
@@ -40,8 +40,7 @@ class StatisticsTest {
     @Test
     public void constructor_nullParameters_throwsNullPointerException() {
 
-        ObservableList<Expense> VALID_EXPENSE_LIST = FXCollections.observableArrayList();
-        VALID_EXPENSE_LIST.add(VALID_EXPENSE);
+
 //        ObservableList<Expense> EMPTY_EXPENSE_LIST = FXCollections.observableArrayList();
         List<Category> categories = Category.getValidCategories();
 
@@ -80,19 +79,17 @@ class StatisticsTest {
     @Test
     void calculateStats_validInputForStats_success() {
 
-        ObservableList<Expense> VALID_EXPENSE_LIST = FXCollections.observableArrayList();
-        VALID_EXPENSE_LIST.add(VALID_EXPENSE);
         String commandWord = StatsCommand.COMMAND_WORD;
 
-        assertTrue(Statistics.calculateStats(VALID_EXPENSE_LIST, commandWord,
+        assertTrue(Statistics.calculateStats(commandWord,
                 VALID_EARLY_TIMESTAMP, VALID_LATE_TIMESTAMP, VALID_BUDGET, true) instanceof PieChartStatistics);
-        assertTrue(Statistics.calculateStats(VALID_EXPENSE_LIST, commandWord,
+        assertTrue(Statistics.calculateStats(commandWord,
                 VALID_EARLY_TIMESTAMP, VALID_EARLY_TIMESTAMP, VALID_BUDGET, true) instanceof PieChartStatistics);
-        assertTrue(Statistics.calculateStats(VALID_EXPENSE_LIST, commandWord,
+        assertTrue(Statistics.calculateStats(commandWord,
                 VALID_LATE_TIMESTAMP, INVALID_TIMESTAMP, VALID_BUDGET, false) instanceof PieChartStatistics);
-        assertTrue(Statistics.calculateStats(VALID_EXPENSE_LIST, commandWord,
+        assertTrue(Statistics.calculateStats(commandWord,
                 INVALID_TIMESTAMP, VALID_LATE_TIMESTAMP, VALID_BUDGET, true) instanceof PieChartStatistics);
-        assertTrue(Statistics.calculateStats(VALID_EXPENSE_LIST, commandWord,
+        assertTrue(Statistics.calculateStats(commandWord,
                 INVALID_TIMESTAMP, INVALID_TIMESTAMP, VALID_BUDGET, false) instanceof PieChartStatistics);
     }
 
@@ -102,15 +99,13 @@ class StatisticsTest {
     @Test
     void calculateStats_validInputForStatsCompare_success() {
 
-        ObservableList<Expense> VALID_EXPENSE_LIST = FXCollections.observableArrayList();
-        VALID_EXPENSE_LIST.add(VALID_EXPENSE);
         String commandWord = StatsCompareCommand.COMMAND_WORD;
 
-        assertTrue(Statistics.calculateStats(VALID_EXPENSE_LIST, commandWord,
+        assertTrue(Statistics.calculateStats(commandWord,
                 VALID_EARLY_TIMESTAMP, VALID_EARLY_TIMESTAMP, VALID_BUDGET, true) instanceof TabularStatistics);
-        assertTrue(Statistics.calculateStats(VALID_EXPENSE_LIST, commandWord,
+        assertTrue(Statistics.calculateStats(commandWord,
                 VALID_EARLY_TIMESTAMP, VALID_LATE_TIMESTAMP, VALID_BUDGET, true) instanceof TabularStatistics);
-        assertTrue(Statistics.calculateStats(VALID_EXPENSE_LIST, commandWord,
+        assertTrue(Statistics.calculateStats(commandWord,
                 VALID_LATE_TIMESTAMP, VALID_EARLY_TIMESTAMP, VALID_BUDGET, false) instanceof TabularStatistics);
     }
 
@@ -119,19 +114,17 @@ class StatisticsTest {
     @Test
     void calculateStats_validInputForStatsTrend_success() {
 
-        ObservableList<Expense> VALID_EXPENSE_LIST = FXCollections.observableArrayList();
-        VALID_EXPENSE_LIST.add(VALID_EXPENSE);
         String commandWord = StatsTrendCommand.COMMAND_WORD;
 
-        assertTrue(Statistics.calculateStats(VALID_EXPENSE_LIST, commandWord,
+        assertTrue(Statistics.calculateStats(commandWord,
                 VALID_EARLY_TIMESTAMP, VALID_LATE_TIMESTAMP, VALID_BUDGET, true) instanceof TrendStatistics);
-        assertTrue(Statistics.calculateStats(VALID_EXPENSE_LIST, commandWord,
+        assertTrue(Statistics.calculateStats(commandWord,
                 VALID_EARLY_TIMESTAMP, VALID_EARLY_TIMESTAMP, VALID_BUDGET, true) instanceof TrendStatistics);
-        assertTrue(Statistics.calculateStats(VALID_EXPENSE_LIST, commandWord,
+        assertTrue(Statistics.calculateStats(commandWord,
                 VALID_LATE_TIMESTAMP, INVALID_TIMESTAMP, VALID_BUDGET, false) instanceof TrendStatistics);
-        assertTrue(Statistics.calculateStats(VALID_EXPENSE_LIST, commandWord,
+        assertTrue(Statistics.calculateStats(commandWord,
                 INVALID_TIMESTAMP, VALID_LATE_TIMESTAMP, VALID_BUDGET, true) instanceof TrendStatistics);
-        assertTrue(Statistics.calculateStats(VALID_EXPENSE_LIST, commandWord,
+        assertTrue(Statistics.calculateStats(commandWord,
                 INVALID_TIMESTAMP, INVALID_TIMESTAMP, VALID_BUDGET, false) instanceof TrendStatistics);
     }
 
@@ -155,56 +148,43 @@ class StatisticsTest {
     @Test
     void calculateStats_invalidInputForStats_throwsException() {
 
-        ObservableList<Expense> VALID_EXPENSE_LIST = FXCollections.observableArrayList();
-        VALID_EXPENSE_LIST.add(VALID_EXPENSE);
         String commandWord = StatsCommand.COMMAND_WORD;
 
-        assertThrows(NullPointerException.class, () -> Statistics.calculateStats(null, commandWord,
-                VALID_EARLY_TIMESTAMP, VALID_LATE_TIMESTAMP, VALID_BUDGET, true));
 
 //        assertThrows(NullPointerException.class, () -> Statistics.calculateStats(VALID_EXPENSE_LIST, commandWord,
 //                VALID_LATE_TIMESTAMP, VALID_EARLY_TIMESTAMP,  VALID_BUDGET, false));
 
-        assertThrows(NullPointerException.class, () -> Statistics.calculateStats(VALID_EXPENSE_LIST, commandWord,
+        assertThrows(NullPointerException.class, () -> Statistics.calculateStats(commandWord,
                 VALID_EARLY_TIMESTAMP, VALID_LATE_TIMESTAMP, INVALID_BUDGET, false));
     }
 
     @Test
     void calculateStats_invalidInputForStatsCompare_throwsException() {
 
-        ObservableList<Expense> VALID_EXPENSE_LIST = FXCollections.observableArrayList();
-        VALID_EXPENSE_LIST.add(VALID_EXPENSE);
         String commandWord = StatsCompareCommand.COMMAND_WORD;
 
-        assertThrows(NullPointerException.class, () -> Statistics.calculateStats(null, commandWord,
-                VALID_EARLY_TIMESTAMP, VALID_LATE_TIMESTAMP, VALID_BUDGET, true));
-
-        assertThrows(NullPointerException.class, () -> Statistics.calculateStats(VALID_EXPENSE_LIST, commandWord,
+        assertThrows(NullPointerException.class, () -> Statistics.calculateStats(commandWord,
                 VALID_EARLY_TIMESTAMP, VALID_LATE_TIMESTAMP, INVALID_BUDGET, false));
 
 
-        assertThrows(NullPointerException.class, () -> Statistics.calculateStats(VALID_EXPENSE_LIST, commandWord,
+        assertThrows(NullPointerException.class, () -> Statistics.calculateStats(commandWord,
                 INVALID_TIMESTAMP, VALID_LATE_TIMESTAMP, VALID_BUDGET, true));
 
 
-        assertThrows(NullPointerException.class, () -> Statistics.calculateStats(VALID_EXPENSE_LIST, commandWord,
+        assertThrows(NullPointerException.class, () -> Statistics.calculateStats(commandWord,
                 VALID_EARLY_TIMESTAMP, INVALID_TIMESTAMP, VALID_BUDGET, false));
     }
 
     @Test
     void calculateStats_invalidInputForStatsTrend_throwsException() {
 
-        ObservableList<Expense> VALID_EXPENSE_LIST = FXCollections.observableArrayList();
-        VALID_EXPENSE_LIST.add(VALID_EXPENSE);
         String commandWord = StatsTrendCommand.COMMAND_WORD;
 
-        assertThrows(NullPointerException.class, () -> Statistics.calculateStats(null, commandWord,
-                VALID_EARLY_TIMESTAMP, VALID_LATE_TIMESTAMP, VALID_BUDGET, true));
 
         //        assertThrows(NullPointerException.class, () -> Statistics.calculateStats(VALID_EXPENSE_LIST, commandWord,
 //                VALID_LATE_TIMESTAMP, VALID_EARLY_TIMESTAMP,  VALID_BUDGET, false));
 
-        assertThrows(NullPointerException.class, () -> Statistics.calculateStats(VALID_EXPENSE_LIST, commandWord,
+        assertThrows(NullPointerException.class, () -> Statistics.calculateStats(commandWord,
                 VALID_EARLY_TIMESTAMP, VALID_LATE_TIMESTAMP, INVALID_BUDGET, false));
     }
 
