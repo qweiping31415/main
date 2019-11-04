@@ -19,11 +19,11 @@ class StatsCommandParserTest {
 
     @Test
     void parse_optionalFields_success() throws ParseException {
-        //correct order
+        //start date and end date in the usual order
         assertNotNull(parser.parse(String.format(" %s01-10-2019 %s31-10-2019",
                 PREFIX_START_DATE,
                 PREFIX_END_DATE)));
-        //flipped
+        //with start date and end date but flipped
         assertNotNull(parser.parse(String.format(" %s31-10-2019 %s01-10-2019",
                 PREFIX_END_DATE,
                 PREFIX_START_DATE)));
@@ -36,6 +36,8 @@ class StatsCommandParserTest {
         //end date
         assertNotNull(parser.parse(String.format(" %s31-10-2019 ",
                 PREFIX_END_DATE)));
+        //empty
+        assertNotNull(parser.parse(""));
     }
 
     @Test
@@ -51,4 +53,6 @@ class StatsCommandParserTest {
         assertParseFailure(parser, CommandTestUtil.STATS_DUPLICATE_CATEGORY,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, StatsCommand.MESSAGE_USAGE));
     }
+
+    //consider checking for natural language commands
 }

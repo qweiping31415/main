@@ -32,7 +32,7 @@ public class TrendStatistics extends Statistics {
 
     private List<Timestamp> dates = new ArrayList<>();
 
-    private List<Double> periodicTotalExpenditure = new ArrayList<>();
+    private List<Double> periodicTotalExpenditures = new ArrayList<>();
 
     private List<Double> periodicBudgetLimits = new ArrayList<>();
 
@@ -101,14 +101,6 @@ public class TrendStatistics extends Statistics {
      * @param validCategories List of allowed categories in MooLah
      * @param startDate The start date of the tracking period
      * @param endDate The end date of the tracking period
-     */
-
-    /**
-     * A method to practise defensive programming
-     * @param expenses List of expenses
-     * @param validCategories List of allowed categories in MooLah
-     * @param startDate The start date of the tracking period
-     * @param endDate The end date of the tracking period
      * @param primaryBudget The primary budget whose statistics is taken
      * @param isBudgetMode The condition to determine which mode is used
      */
@@ -149,7 +141,7 @@ public class TrendStatistics extends Statistics {
 
             if (budgetLimitMode) {
                 double periodicTotalExpenditure = getTotalExpenditure(periodicCategorisedExpenses);
-                this.periodicTotalExpenditure.add(periodicTotalExpenditure);
+                this.periodicTotalExpenditures.add(periodicTotalExpenditure);
                 periodicBudgetLimits.add(primaryBudget.getAmount().getAsDouble());
             } else {
                 List<Double> periodicCategoricalExpenditure = getCategoricalExpenditure(periodicCategorisedExpenses);
@@ -237,7 +229,7 @@ public class TrendStatistics extends Statistics {
     }
 
     public List<Double> getPeriodicTotalExpenditure() {
-        return periodicTotalExpenditure;
+        return periodicTotalExpenditures;
     }
 
     public List<Double> getPeriodicBudgetLimits() {
