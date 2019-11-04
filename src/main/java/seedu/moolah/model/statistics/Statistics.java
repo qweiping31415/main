@@ -75,6 +75,9 @@ public class Statistics {
                                             Timestamp date1, Timestamp date2,
                                             Budget primaryBudget, boolean isBudgetMode) {
         requireNonNull(expenses);
+        requireNonNull(command);
+        requireNonNull(primaryBudget);
+
         List<Category> validCategories = Category.getValidCategories();
         switch (command) {
         case StatsCommand.COMMAND_WORD:

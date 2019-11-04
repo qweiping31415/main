@@ -96,8 +96,6 @@ public class PieChartStatistics extends Statistics {
      * Gathers the data to be used for the elements of the PieChart
      */
     private void generatePieChartData() {
-        requireNonNull(startDate);
-        requireNonNull(endDate);
 
         this.budgetCategories = collateBudgetCategories(expenses);
 
