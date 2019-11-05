@@ -131,9 +131,12 @@ public class PieChartStatistics extends Statistics {
         for (Expense expense : expenses) {
             Timestamp date = expense.getTimestamp();
 
+
             if (date.compareDateTo(startDate) != -1 && date.compareDateTo(endDate) != 1) {
+
                 int index = budgetCategories.indexOf(expense.getCategory());
                 expensesInCategories.get(index).add(expense);
+
             }
         }
         return expensesInCategories;
@@ -165,8 +168,14 @@ public class PieChartStatistics extends Statistics {
 
         double totalAmount = 0.0;
 
+
+
+
         for (int i = 0; i < percentages.size(); i++) {
+
             ArrayList<Expense> categoryStats = data.get(i);
+
+
             for (Expense expense : categoryStats) {
                 double oldCategoricalTotal = percentages.get(i);
                 double price = Double.parseDouble(expense.getPrice().value);
@@ -174,6 +183,8 @@ public class PieChartStatistics extends Statistics {
                 totalAmount += price;
                 int oldNumberOfEntries = numberOfEntries.get(i);
                 numberOfEntries.set(i, oldNumberOfEntries + 1);
+
+
             }
         }
 
@@ -183,12 +194,16 @@ public class PieChartStatistics extends Statistics {
 
 
         for (int i = 0; i < percentages.size(); i++) {
+
             double categoricalTotal = percentages.get(i);
             double roundedResult = Math.round(categoricalTotal * 10000 / totalAmount) / 100.0;
+
+
             if (roundedResult != 0.00) {
                 String oldName = names.get(i);
                 formattedCategories.add(String.format("%s(%.2f%%)", oldName, roundedResult));
                 formattedPercentages.add(roundedResult);
+
             }
         }
 
