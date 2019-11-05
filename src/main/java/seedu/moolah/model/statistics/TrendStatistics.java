@@ -70,21 +70,20 @@ public class TrendStatistics extends Statistics {
         boolean isStartPresent = startDate != null;
         boolean isEndPresent = endDate != null;
 
-        if (isStartPresent && isEndPresent) {
-            //pass
-        } else if (isStartPresent) {
-            endDate = startDate.createForwardTimestamp(primaryBudget.getPeriod(),
-                    2 * StatsTrendCommand.HALF_OF_PERIOD_NUMBER);
-        } else if (isEndPresent) {
-            startDate = endDate.createBackwardTimestamp(primaryBudget.getPeriod(),
-                    2 * StatsTrendCommand.HALF_OF_PERIOD_NUMBER);
-        } else {
+        if (!isStartPresent && !isEndPresent) {
             Timestamp centreDate = primaryBudget.getStartDate();
             endDate = centreDate.createForwardTimestamp(primaryBudget.getPeriod(),
                     StatsTrendCommand.HALF_OF_PERIOD_NUMBER);
             startDate = centreDate.createBackwardTimestamp(primaryBudget.getPeriod(),
                     StatsTrendCommand.HALF_OF_PERIOD_NUMBER);
+        } else if (isStartPresent && !isEndPresent) {
+            endDate = startDate.createForwardTimestamp(primaryBudget.getPeriod(),
+                    2 * StatsTrendCommand.HALF_OF_PERIOD_NUMBER);
+        } else if (!isStartPresent) {
+            startDate = endDate.createBackwardTimestamp(primaryBudget.getPeriod(),
+                    2 * StatsTrendCommand.HALF_OF_PERIOD_NUMBER);
         }
+
 
         TrendStatistics statistics = TrendStatistics.verify(primaryBudget.getExpenses(), validCategories,
                 startDate, endDate, primaryBudget, isBudgetMode);
@@ -135,16 +134,16 @@ public class TrendStatistics extends Statistics {
             Timestamp nextLocalStartDate = localStartDate.plus(period.getPeriod());
             Timestamp localEndDate = nextLocalStartDate.minusDays(1);
 
-            ArrayList<ArrayList<Expense>> periodicCategorisedExpenses =
-                    getPeriodicCategorisedExpenses(localStartDate, localEndDate);
+            ArrayList<ArrayList<Expense>> categorisedPeriodicExpenses =
+                    getCategorisedPeriodicExpenses(localStartDate, localEndDate);
 
             if (budgetLimitMode) {
-                double periodicTotalExpenditure = getTotalExpenditure(periodicCategorisedExpenses);
+                double periodicTotalExpenditure = getTotalExpenditure(categorisedPeriodicExpenses);
                 this.periodicTotalExpenditures.add(periodicTotalExpenditure);
                 periodicBudgetLimits.add(primaryBudget.getAmount().getAsDouble());
             } else {
-                List<Double> periodicCategoricalExpenditure = getCategoricalExpenditure(periodicCategorisedExpenses);
-                flatMapAdd(periodicCategoricalExpenditure);
+                List<Double> categorisedExpenditureAtPeriod = getCategoricalExpenditure(categorisedPeriodicExpenses);
+                flatMapAdd(categorisedExpenditureAtPeriod);
             }
             dates.add(localStartDate);
             intervalCount++;
@@ -175,16 +174,16 @@ public class TrendStatistics extends Statistics {
 
     /**
      * Adds the periodic expenditure from each category to its respective category list
-     * @param periodicCategoricalExpenditure A list of total expenditure for each category
+     * @param categorisedExpenditureAtPeriod A list of total expenditure for each category
      */
-    private void flatMapAdd(List<Double> periodicCategoricalExpenditure) {
-        for (int i = 0; i < periodicCategoricalExpenditure.size(); i++) {
+    private void flatMapAdd(List<Double> categorisedExpenditureAtPeriod) {
+        for (int i = 0; i < categorisedExpenditureAtPeriod.size(); i++) {
             ArrayList<Double> categoricalExpenses = periodicCategoricalExpenses.get(i);
-            categoricalExpenses.add(periodicCategoricalExpenditure.get(i));
+            categoricalExpenses.add(categorisedExpenditureAtPeriod.get(i));
         }
     }
 
-    private ArrayList<ArrayList<Expense>> getPeriodicCategorisedExpenses(Timestamp startDate, Timestamp endDate) {
+    private ArrayList<ArrayList<Expense>> getCategorisedPeriodicExpenses(Timestamp startDate, Timestamp endDate) {
         TabularStatistics statistics = new TabularStatistics(expenses, getValidCategories(), startDate, endDate);
         ArrayList<ArrayList<Expense>> dataWithTotal = statistics.extractRelevantExpenses(startDate, endDate);
         dataWithTotal.remove(dataWithTotal.size() - 1);

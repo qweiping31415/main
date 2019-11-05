@@ -16,6 +16,6 @@ import seedu.moolah.testutil.TypicalMooLah;
 class TrendStatisticsTest {
 
     @Test
-    void trendLine() {
+    void trendStats_() {
     }
 }

@@ -72,17 +72,14 @@ public class PieChartStatistics extends Statistics {
         boolean isStartPresent = startDate != null;
         boolean isEndPresent = endDate != null;
 
-        if (isStartPresent && isEndPresent) {
-            //pass
-        } else if (isStartPresent) {
-            endDate = startDate.createForwardTimestamp(primaryBudget.getPeriod()).minusDays(1);
-        } else if (isEndPresent) {
-            startDate = endDate.createBackwardTimestamp(primaryBudget.getPeriod()).plusDays(1);
-        } else {
+        if (!isStartPresent && !isEndPresent) {
             startDate = primaryBudget.getStartDate();
             endDate = primaryBudget.getEndDate();
+        } else if (isStartPresent && !isEndPresent) {
+            endDate = startDate.createForwardTimestamp(primaryBudget.getPeriod()).minusDays(1);
+        } else if (!isStartPresent) {
+            startDate = endDate.createBackwardTimestamp(primaryBudget.getPeriod()).plusDays(1);
         }
-
 
         PieChartStatistics statistics = PieChartStatistics.verify(primaryBudget.getExpenses(),
                 validCategories, startDate, endDate);
