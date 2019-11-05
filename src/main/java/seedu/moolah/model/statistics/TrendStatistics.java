@@ -57,7 +57,6 @@ public class TrendStatistics extends Statistics {
     /**
      * Creates 2 trend lines to provide visual aid on the occurrence of total expenses relative to the budget limit
      *
-     * @param expenses List of expenses
      * @param validCategories List of allowed categories in MooLah
      * @param startDate The start date of the tracking period
      * @param endDate The end date of the tracking period
@@ -240,7 +239,7 @@ public class TrendStatistics extends Statistics {
         return budgetLimitMode;
     }
 
-    public String toString () {
+    public String toString() {
         return String.format("%s\n%s", getTitle(), getPeriodicTotalExpenditure());
     }
 }

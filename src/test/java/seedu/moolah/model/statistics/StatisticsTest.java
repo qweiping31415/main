@@ -136,11 +136,14 @@ class StatisticsTest {
 //        ObservableList<Expense> VALID_EXPENSE_LIST = FXCollections.observableArrayList();
 //        VALID_EXPENSE_LIST.add(VALID_EXPENSE);
 //
-//        assertThrows(NullPointerException.class, () -> Statistics.calculateStats(VALID_EXPENSE_LIST, EMPTY_STRING_COMMAND_WORD,
+//        assertThrows(NullPointerException.class, () -> Statistics.calculateStats(VALID_EXPENSE_LIST,
+//        EMPTY_STRING_COMMAND_WORD,
 //                VALID_EARLY_TIMESTAMP, VALID_LATE_TIMESTAMP, VALID_BUDGET, true));
-//        assertThrows(NullPointerException.class, () -> Statistics.calculateStats(VALID_EXPENSE_LIST, WHITE_SPACE_COMMAND_WORD,
+//        assertThrows(NullPointerException.class, () -> Statistics.calculateStats(VALID_EXPENSE_LIST,
+//        WHITE_SPACE_COMMAND_WORD,
 //                VALID_EARLY_TIMESTAMP, VALID_LATE_TIMESTAMP, VALID_BUDGET, true));
-//        assertThrows(NullPointerException.class, () -> Statistics.calculateStats(VALID_EXPENSE_LIST, INVALID_COMMAND_WORD,
+//        assertThrows(NullPointerException.class, () -> Statistics.calculateStats(VALID_EXPENSE_LIST,
+//        INVALID_COMMAND_WORD,
 //                VALID_EARLY_TIMESTAMP, VALID_LATE_TIMESTAMP, VALID_BUDGET, true));
 //    }
 
@@ -181,7 +184,8 @@ class StatisticsTest {
         String commandWord = StatsTrendCommand.COMMAND_WORD;
 
 
-        //        assertThrows(NullPointerException.class, () -> Statistics.calculateStats(VALID_EXPENSE_LIST, commandWord,
+        //        assertThrows(NullPointerException.class, () ->
+        //        Statistics.calculateStats(VALID_EXPENSE_LIST, commandWord,
 //                VALID_LATE_TIMESTAMP, VALID_EARLY_TIMESTAMP,  VALID_BUDGET, false));
 
         assertThrows(NullPointerException.class, () -> Statistics.calculateStats(commandWord,

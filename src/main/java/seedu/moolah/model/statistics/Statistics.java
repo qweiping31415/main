@@ -73,7 +73,6 @@ public class Statistics {
     public static Statistics calculateStats(String command,
                                             Timestamp date1, Timestamp date2,
                                             Budget primaryBudget, boolean isBudgetMode) {
-        //requireNonNull(expenses);
         requireNonNull(command);
         requireNonNull(primaryBudget);
 

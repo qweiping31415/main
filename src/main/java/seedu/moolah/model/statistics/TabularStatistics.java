@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+
 import seedu.moolah.model.budget.Budget;
 import seedu.moolah.model.expense.Category;
 import seedu.moolah.model.expense.Expense;
@@ -185,7 +186,7 @@ public class TabularStatistics extends Statistics {
     private void convertDataToFigures(ArrayList<ArrayList<Expense>> data,
                                       ArrayList<ThreeElementTableEntry> table) {
 
-        table.set(categorySize, new ThreeElementTableEntry("Total", 0, 0));
+        table.set(categorySize, new ThreeElementTableEntry("TOTAL", 0, 0));
         ThreeElementTableEntry entryForTotal = table.get(categorySize);
 
         for (int i = 0; i < categorySize; i++) {
@@ -223,6 +224,53 @@ public class TabularStatistics extends Statistics {
     public String toString() {
         return String.format("%s\n%s", getTitle(), getUnionDifferenceTable());
     }
+
+
+    /**
+     * Creates an empty table for testing purposes.
+     */
+    public static List<FiveElementTableEntry> createEmptyTableWithTotal() {
+        List<FiveElementTableEntry> headers = new ArrayList<>();
+        for (Category category : Category.getValidCategories()) {
+            headers.add(FiveElementTableEntry.createEmptyWithName(category.getCategoryName()));
+        }
+        headers.add(FiveElementTableEntry.createEmptyWithName("TOTAL"));
+        return headers;
+    }
+
+    /**
+     * Replaces exactly one row in the table
+     * @param table Table containing all data to be put onto TableView
+     * @param entry Row that requires changing
+     */
+    private static List<FiveElementTableEntry> replaceWith(List<FiveElementTableEntry> table,
+                                                           FiveElementTableEntry entry) {
+        List<FiveElementTableEntry> result = new ArrayList<>();
+        for (FiveElementTableEntry rows : table) {
+            if (entry.getName().equals(rows.getName())) {
+                result.add(entry);
+            } else {
+                result.add(rows);
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Replaces the rows of the table if there are table entries that differ from it
+     * @param table Table containing all data to be put onto TableView
+     * @param rows Rows that require changing
+     */
+    public static List<FiveElementTableEntry> replaceWith(List<FiveElementTableEntry> table,
+                                                          FiveElementTableEntry ... rows) {
+        List<FiveElementTableEntry> result = table;
+        for (FiveElementTableEntry row: rows) {
+            result = replaceWith(result, row);
+        }
+        return result;
+    }
+
+
 
 
 }

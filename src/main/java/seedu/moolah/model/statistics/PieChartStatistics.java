@@ -84,7 +84,8 @@ public class PieChartStatistics extends Statistics {
         }
 
 
-        PieChartStatistics statistics = PieChartStatistics.verify(primaryBudget.getExpenses(), validCategories, startDate, endDate);
+        PieChartStatistics statistics = PieChartStatistics.verify(primaryBudget.getExpenses(),
+                validCategories, startDate, endDate);
         statistics.generatePieChartData();
         return statistics;
     }

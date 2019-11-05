@@ -197,7 +197,7 @@ public class TypicalMooLah {
 
     public static final Expense MEE_SIAM = new ExpenseBuilder()
             .withDescription("Mee Siam")
-            .withPrice("10")
+            .withPrice("5")
             .withCategory("Food")
             .withTimestamp("13-09-2015 noon")
             .withBudgetName("Budget")
@@ -207,7 +207,7 @@ public class TypicalMooLah {
 
     public static final Expense MEE_REBUS = new ExpenseBuilder()
             .withDescription("Mee Rebus")
-            .withPrice("10")
+            .withPrice("5")
             .withCategory("Food")
             .withTimestamp("13-09-2015 noon")
             .withBudgetName("Budget")
