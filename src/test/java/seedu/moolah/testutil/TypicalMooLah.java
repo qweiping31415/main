@@ -53,7 +53,7 @@ public class TypicalMooLah {
             .withIsPrimary(false)
             .build();
 
-//==== For Statistics testing ===
+    //==== For Statistics testing ===
     public static final Budget DAY_BUDGET = new BudgetBuilder()
             .withDescription("budget")
             .withAmount("100")

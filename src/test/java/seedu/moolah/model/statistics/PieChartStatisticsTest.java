@@ -21,7 +21,6 @@ class PieChartStatisticsTest {
 
     public static final List<String> DAY_BUDGET_RESULTS = List.of("FOOD(100.00%)");
 
-
     public static final Timestamp WEEK_BUDGET_START_DATE =
             Timestamp.createTimestampIfValid("06-09-2016").get();
     public static final Timestamp WEEK_BUDGET_END_DATE =
